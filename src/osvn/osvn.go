@@ -5,14 +5,27 @@ import (
 	"net/http"
 	"time"
 	"math/rand"
+	"strings"
+	"plugins"
+	// "gumsplugin"
 )
 
+
+
 func main() {
+	http.HandleFunc("/", loadPlugins)
 	http.HandleFunc("/myip", ip)
 	http.HandleFunc("/whatismyip", ip)
 	http.HandleFunc("/time", _time)
 	http.HandleFunc("/pass", password)
 	http.ListenAndServe(":9999", nil)
+}
+
+func loadPlugins(write http.ResponseWriter, read *http.Request) {
+	requestURI := read.RequestURI 
+	requestParams := strings.Split(requestURI, "/")
+	plugins.LoadPlugin(requestParams[0])
+	fmt.Println("REQUEST URI", requestParams)
 }
 
 func ip(write http.ResponseWriter, read *http.Request) {
