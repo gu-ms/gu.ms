@@ -7,6 +7,7 @@ Each *gum*, in **gu.ms** is a sticky and short URL that provides some valuable i
 if there exists a gum that can provide you the required information, it can be obtained by simply calling the respective tiny URL (gum).
 These *gums* provide the information as plain text (without any additional mark-up or metadata).
 
+*gums* could be useful for IOT (and connected embedded) devices where the memory footprint is quite small and cannot have scope to carry libraries and/or binaries to carry out certain actions. If there is a *gum* available for pulling required information, it can help in getting rid of an external library or binary to carry out processing to get the same information.
 
 ## Some Use-cases ##
 
