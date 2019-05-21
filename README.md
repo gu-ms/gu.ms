@@ -5,7 +5,7 @@ A Nature friendly initiative which targets zero-mark-up-language and hence zero-
 
 Each *gum*, in **gu.ms** is a sticky and short URL that provides some valuable information. For each particular use-case or requirement, 
 if there exists a gum that can provide you the required information, it can be obtained by simply calling the respective tiny URL (gum).
-These *gums* provide the information as plain text (without any additional mark-up or metadata).
+These *gums* provide the information as plain text (without any additional mark-up or metadata). This is particulary useful in scripting/development environment, where the code can make use of the gums URL by calling it and directly assigning the return value to a **variable** without any further processing required. 
 
 *gums* could be useful for IOT (and connected embedded) devices where the memory footprint is quite small and cannot have scope to carry libraries and/or binaries to carry out certain actions. If there is a *gum* available for pulling required information, it can help in getting rid of an external library or binary to carry out processing to get the same information.
 
