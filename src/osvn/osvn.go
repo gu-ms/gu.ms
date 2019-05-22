@@ -2,51 +2,43 @@ package main
 
 import (
 	"fmt"
+	"github.com/shogo82148/go-http-logger"
+	"gumsplugin"
+	"log"
 	"net/http"
-	"time"
-	"math/rand"
-	"strings"
 	"plugins"
-	// "gumsplugin"
+	"strings"
 )
 
-
+func Logger(l httplogger.ResponseLog, r *http.Request) {
+	fmt.Println(r.Referer)
+	log.Println(r.RemoteAddr, r.RequestURI, r.Method, r.Referer(), r.ContentLength, r.Host, l.Status(), l.Size())
+}
 
 func main() {
-	http.HandleFunc("/", loadPlugins)
-	http.HandleFunc("/myip", ip)
-	http.HandleFunc("/whatismyip", ip)
-	http.HandleFunc("/time", _time)
-	http.HandleFunc("/pass", password)
+	
+	h := httplogger.LoggingHandler(httplogger.LoggerFunc(Logger), http.HandlerFunc(loadPlugins))
+	http.Handle("/", h)
+	
 	http.ListenAndServe(":9999", nil)
 }
 
 func loadPlugins(write http.ResponseWriter, read *http.Request) {
-	requestURI := read.RequestURI 
+	requestURI := read.RequestURI
 	requestParams := strings.Split(requestURI, "/")
-	plugins.LoadPlugin(requestParams[0])
-	fmt.Println("REQUEST URI", requestParams)
-}
+	var loadedPlugin gumsplugin.GumsPlugin
 
-func ip(write http.ResponseWriter, read *http.Request) {
-	fmt.Fprintf(write, read.RemoteAddr)
-}
-
-func _time(write http.ResponseWriter, read *http.Request) {
-	t := time.Now()
-	fmt.Fprintf(write, t.Format("13:53:35"))
-}
-
-func password(write http.ResponseWriter, read *http.Request) {
-	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~`!@#$%^&*()_+-=<>?\",./':;{}[]|\\")
-	b := make([]rune, 16)
-	for i := range b {
-		b[i] = letters[rand.Intn(len(letters))]
+	// requestParams contains empty value at index 0
+	loadedPlugin, err := plugins.LoadPlugin(requestParams[1])
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		// send the requestParams array from index 2
+		response, err := loadedPlugin.Respond(read, requestParams[2:])
+		if err != nil {
+			http.Error(write, "", http.StatusInternalServerError)
+		} 
+		fmt.Fprintf(write, response)
 	}
-
-	fmt.Fprintf(write, string(b))
 }
 
-func init() {
-    rand.Seed(time.Now().UnixNano())
-}
