@@ -4,27 +4,35 @@ import (
     "os"
     "plugin"
     "fmt"
-    "gumsplugin"
-		"log"
 		"bufio"
 		"strings"
+
+		gpl "gums/plugin"
 )
 
-type gplugin gumsplugin.GumsPlugin 
+type gplugin gpl.GumsPlugin 
 
 const modsPath string = "./plugins/mods/"
 const gumsPath string = "./plugins/gums/"
 const aliasesPath string = gumsPath + "aliases.asc"
 var aliases = make(map[string] string)
 
+
 /*
  * LoadPlugin loads the requested plugin and activates it
  */
-func LoadPlugin(loadPlugin string) (gumsplugin.GumsPlugin, error) {
+func LoadPlugin (
+	      loadPlugin string, 
+				logDebug func(string, ...interface{}),
+        logSevere func(string, ...interface{})) (gpl.GumsPlugin, error) {
+
+	  if(len(aliases) == 0) {
+			loadDefault(logDebug, logSevere)
+		}
 
 		aliasPlugin := aliases[loadPlugin]
 		if aliasPlugin == "" {
-        aliasPlugin = loadPlugin
+        return nil, fmt.Errorf("Not found!")
 		} 
 
     // the module to load
@@ -56,7 +64,8 @@ func LoadPlugin(loadPlugin string) (gumsplugin.GumsPlugin, error) {
 }
 
 // Loads a list of aliases for respective functions
-func init() {
+func loadDefault(logDebug func(string, ...interface{}),
+                 logSevere func(string, ...interface{})) {
 	numMods := 0
 	numAliases := 0
 
@@ -100,10 +109,9 @@ func init() {
 	}
 
 	if err := scanner.Err(); err != nil {
-			log.Fatal(err)
+			//log.Fatal(err)
+			logSevere("%v", err)
 	}
 
-	
-	fmt.Println(aliases)
-	fmt.Println("Loaded", numMods, "modules and", numAliases, "aliases")
+	logDebug("Loaded %d modules with %d aliases", numMods, numAliases)
 }

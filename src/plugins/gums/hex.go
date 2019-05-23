@@ -9,7 +9,7 @@ import (
  
 type hexclient int
 
-func (s hexclient) Respond(request *http.Request, params []string) (string, error) {
+func (s hexclient) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
 	if len(params) == 0 || (len(params) > 1 && params[0] == "") {
 		return "", fmt.Errorf("HEXMOD: no string supplied to convert")
 	}

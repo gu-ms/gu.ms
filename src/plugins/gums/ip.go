@@ -10,7 +10,7 @@ import (
  
 type clientip int
 
-func (s clientip) Respond(request *http.Request, params []string) (string, error) {
+func (s clientip) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
     // remoteAddr has last priority (hence, checked first)
     ip, _, err := net.SplitHostPort(request.RemoteAddr)
     // x-forwarded-for has next priority

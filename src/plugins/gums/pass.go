@@ -20,7 +20,7 @@ var (
 	sym = []rune("~`!@#$%^&*()_+-=<>?\",./':;{}[]|\\")
 )
  
-func (s passclient) Respond(request *http.Request, params []string) (string, error) {
+func (s passclient) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
 
 
 	ticker := time.NewTicker(300 * time.Second)
