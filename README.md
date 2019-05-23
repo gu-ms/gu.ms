@@ -13,41 +13,92 @@ These *gums* provide the information as plain text (without any additional mark-
 
 The following is a short list of possible use-cases. Not all might be available yet! 
 
-    Contributors are welcome to add use-cases and/or solutions
+    Contributors are welcome to add use-cases and/or gums
 
 
 ### System administrator use-cases ###
 
-    gu.ms/ip               your (public) IP address
-    gu.ms/pass             random password generator [default:16 digit]
-    gu.ms/pass/an/10       random password generator with 10 digits and *alpha* *numeric* only
-    gu.ms/mx/google.com    provides the MX record for google.com domain
-    gu.ms/ns/google.com    provides the nameservers for google.com domain
-    gu.ms/cert/google.com  provides the certificate validity or where the cert has failed
-    gu.ms/man/lsmod        man page of lsmod
-    gu.ms/time             provides current time in GMT
+URL| Description
+---|------------
+[gu.ms/ip](http://gu.ms/ip)| your (public) IP address
+[gu.ms/pass](http://gu.ms/pass)| random password generator [default:16 digit]
+[gu.ms/pass/10/an](http://gu.ms/pass/10/an)| random password generator with 10 digits and *alpha* *numeric* only
+[gu.ms/mx/google.com](http://gu.ms/mx/google.com)| the MX record for google.com domain
+[gu.ms/ns/google.com](http://gu.ms/ns/google.com)| the nameservers for google.com domain
+gu.ms/cert/google.com| provides the certificate validity or where the cert has failed
+gu.ms/man/lsmod| man page of lsmod
+[gu.ms/time](http://gu.ms/time)| provides current time in GMT
     
+
+##### IP Address #####
+    Alias URLs for getting your (public) IP
+    
+    gu.ms/ip
+    gu.ms/whatsmyip
+    gu.ms/whatismyip
+    gu.ms/myip
+    
+##### Password Generator ######
+    Password generator based on the following classes
+    
+    1. A: Password must contain ONLY uppercase letters (A...Z)
+    2. a: Password must contain ONLY lowercase letters (a...z)
+    3. n: Password must contain ONLY digits (or generate a random integer) (0...9)
+    4. s: Password must contain ONLY symbols (~.../)
+    5. combinations of above: an, An, As, ans... etc
+    
+    examples:
+    
+URL| Description
+---|------------
+[gu.ms/pass/16/a](http://gu.ms/pass/16/a) | generate 16 digit random text using lower case letters only
+[gu.ms/pass/10/An](http://gu.ms/pass/10/An) | generate 10 digit random text using upper & lower case letters only
+[gu.ms/pass/8](http://gu.ms/pass/8) | generate 8 digit randon password using upper & lower case letters, numbers & symbols
+    
+##### DNS Records #####
+    Several DNS records of a domain can be queried. 
+    NOTE: There can be multiple records for each of the query and if present, each record will be on its own line
+    
+URL|Description
+---|------------
+[gu.ms/dns/google.com](http://gu.ms/dns/google.com)| fetch IP address of google.com
+[gu.ms/mx/example.com](http://gu.ms/mx/example.com)| fetch MX records of domain.com
+[gu.ms/ns/example.com](http://gu.ms/ns/example.com)| fetch nameservers
+[gu.ms/cname/example.com](http://gu.ms/cname/example.com)| fetch cname records
+[gu.ms/srv/example.com/sip/tcp](http://gu.ms/srv/example.com/sip/tcp)| fetch srv records 
+[gu.ms/txt/example.com](http://gu.ms/txt/example.com)| fetch txt records
+    
+    Reverse DNS 
+URL| Description
+---|------------
+[gu.ms/rev/8.8.8.8](http://gu.ms/rev/8.8.8.8)| reverse domain name search (IP address to domain name)     
 
 ### Programmer use-cases ###
 
-    gu.ms/client           provides your browser info
-    gu.ms/ch/c             provides the ascii value of character 'c'
-    gu.ms/bin/93           display binary
-    gu.ms/hex/45           display hex
+URL| Description
+---|------------
+[gu.ms/client](http://gu.ms/client)| provides your browser info
+gu.ms/ch/c| provides the ascii value of character 'c'
+[gu.ms/bin/93](http://gu.ms/bin/93)| display binary
+[gu.ms/hex/45](http://gu.ms/hex/45)| display hex
     
 ### General use-cases ###
 
-    gu.ms/c/usd/gbp        provides cost of 1 USD in GBP
-    gu.ms/t/edt            provides current time Eastern Time (DST)
-    gu.ms/fc/lon           provides forecast of London
-    gu.ms/cv/mi/m/59       converts 59 miles to meters
-    gu.ms/fl/a/ba2272      current status/arrival time of flight ba2272
-    gu.ms/bmi/100k/165c    BMI calculator
+URL| Description
+---|------------
+gu.ms/c/usd/gbp | provides cost of 1 USD in GBP
+gu.ms/t/edt | provides current time Eastern Time (DST)
+gu.ms/fc/lon | provides forecast of London
+gu.ms/cv/mi/m/59 | converts 59 miles to meters
+gu.ms/fl/a/ba2272 | current status/arrival time of flight ba2272
+gu.ms/bmi/100k/165c | BMI calculator
 
 ### Use-cases for fun ###
-    
-    gu.ms/aa/hello         hello converted to ascii art
-    gu.ms/morse/hello      hello converted to morse code
+
+URL| Description
+---|------------
+gu.ms/aa/hello | hello converted to ascii art
+gu.ms/morse/hello | hello converted to morse code
     
 
 ## Contributors ##
