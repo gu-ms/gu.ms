@@ -32,7 +32,7 @@ func LoadPlugin (
 
 		aliasPlugin := aliases[loadPlugin]
 		if aliasPlugin == "" {
-        return nil, fmt.Errorf("Not found!")
+        return nil, fmt.Errorf("")
 		} 
 
     // the module to load

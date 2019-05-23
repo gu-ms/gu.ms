@@ -35,28 +35,34 @@ func initiateWebServer() {
 func loadPlugins(write http.ResponseWriter, read *http.Request) {
 	requestURI := read.RequestURI
 	requestParams := strings.Split(requestURI, "/")
-	var loadedPlugin gpl.GumsPlugin
-
-	// requestParams contains empty value at index 0
-	loadedPlugin, err := plugins.LoadPlugin(requestParams[1], gumsLogger.LogDebug, gumsLogger.LogSevere)
+	
 	status := http.StatusOK
 	size := 0
 
-	if err != nil {
-		status = http.StatusNotFound
-		gumsLogger.Log404NF("[%s] not found: %v", requestURI, err)
-		http.Error(write, "", status)
+	if requestParams[1] == "" {
+        fmt.Fprintf(write, "hello, world")
 	} else {
-		// send the requestParams array from index 2
-		response, err := loadedPlugin.Respond(read, requestParams[2:], gumsLogger.LogDebug)
+		var loadedPlugin gpl.GumsPlugin
+
+	    // requestParams contains empty value at index 0
+		loadedPlugin, err := plugins.LoadPlugin(requestParams[1], gumsLogger.LogDebug, gumsLogger.LogSevere)
+
 		if err != nil {
-			status = http.StatusInternalServerError
-			gumsLogger.LogISE("%v", err)
+			status = http.StatusNotFound
+			gumsLogger.Log404NF("[%s] not found: %v", requestURI, err)
 			http.Error(write, "", status)
-		} 
-		size = len(response)
-		fmt.Fprintf(write, response)
-	}
+		} else {
+			// send the requestParams array from index 2
+			response, err := loadedPlugin.Respond(requestParams[1], read, requestParams[2:], gumsLogger.LogDebug)
+			if err != nil {
+				status = http.StatusInternalServerError
+				gumsLogger.LogISE("%v", err)
+				http.Error(write, "", status)
+			} 
+			size = len(response)
+			fmt.Fprintf(write, response)
+		}
+    }
 
 	// Access log in Apache default log format. 
 	// TODO: identd (and userid?). For now, using hypens (-) in that place

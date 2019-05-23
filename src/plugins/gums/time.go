@@ -7,7 +7,7 @@ import (
  
 type timeclient int
 
-func (s timeclient) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
+func (s timeclient) Respond(calledFor string, request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
 	t := time.Now()
     return t.Format("2006-01-02 15:04:05"), nil
 }

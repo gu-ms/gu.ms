@@ -8,5 +8,5 @@ import (
  * "Plugin Default interface for plugins"
  */
 type GumsPlugin interface {
-	Respond(*http.Request, []string, func(string, ...interface{})) (string, error)
+	Respond(string, *http.Request, []string, func(string, ...interface{})) (string, error)
 }

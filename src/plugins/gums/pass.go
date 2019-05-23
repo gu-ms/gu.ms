@@ -21,7 +21,7 @@ var (
 	sym      = []rune("~`!@#$%^&*()_+-=<>?\",./':;{}[]|\\")
 )
  
-func (s passclient) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
+func (s passclient) Respond(calledFor string, request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
 
 
 	ticker := time.NewTicker(300 * time.Second)
@@ -71,8 +71,10 @@ func (s passclient) Respond(request *http.Request, params []string, logDebug fun
 	case "ns":
 		letters = append(num, sym...)
 	case "lns":
+	case "ans":
 		letters = append(append(lalpha, num...), sym...)
 	case "uns":
+	case "Ans":
 		letters = append(append(ualpha, num...), sym...)
 	case "us":
 	case "As":

@@ -8,7 +8,7 @@ import (
  
 type client int
 
-func (s client) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
+func (s client) Respond(calledFor string, request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
     return request.Header.Get("User-Agent"), nil
 }
 

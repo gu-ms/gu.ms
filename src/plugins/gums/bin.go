@@ -8,7 +8,7 @@ import (
  
 type binclient int
 
-func (s binclient) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
+func (s binclient) Respond(calledFor string, request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
 	if len(params) == 0 || (len(params) > 1 && params[0] == "") {
 		return "", fmt.Errorf("BINMOD: no string supplied to convert")
 	}
