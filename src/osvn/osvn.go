@@ -44,7 +44,7 @@ func loadPlugins(write http.ResponseWriter, read *http.Request) {
 
 	if err != nil {
 		status = http.StatusNotFound
-		gumsLogger.Log404NF("%v", err)
+		gumsLogger.Log404NF("[%s] not found: %v", requestURI, err)
 		http.Error(write, "", status)
 	} else {
 		// send the requestParams array from index 2

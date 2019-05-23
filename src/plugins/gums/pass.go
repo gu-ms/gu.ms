@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"time"
 	"strconv"
+	"strings"
 )
 
 // ALIASES: [password, passgen] 
@@ -13,11 +14,11 @@ type passclient int
 
 var (
     alphanum = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~`!@#$%^&*()_+-=<>?\",./':;{}[]|\\")
-	alpha = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-	lalpha = []rune("abcdefghijklmnopqrstuvwxyz")
-	ualpha = []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    num = []rune("0123456789")
-	sym = []rune("~`!@#$%^&*()_+-=<>?\",./':;{}[]|\\")
+	alpha    = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	lalpha   = []rune("abcdefghijklmnopqrstuvwxyz")
+	ualpha   = []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    num      = []rune("0123456789")
+	sym      = []rune("~`!@#$%^&*()_+-=<>?\",./':;{}[]|\\")
 )
  
 func (s passclient) Respond(request *http.Request, params []string, logDebug func(string, ...interface{})) (string, error) {
@@ -85,11 +86,14 @@ func (s passclient) Respond(request *http.Request, params []string, logDebug fun
 
 	newPass := make([]rune, passLength)
 	for i := range newPass {
-		newPass[i] = letters[rand.Intn(len(letters)-1)]
+		size := len(letters) - 1
+		randInt := rand.Intn(size)
+		newPass[i] = letters[randInt]
 	}
 	
-    return string(newPass), nil
+	return strings.Replace(string(newPass), "%", "%%", -1), nil
 }
 
 
 var GumsPlugin passclient
+
