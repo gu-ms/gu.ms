@@ -27,7 +27,7 @@ The following is a short list of possible use-cases. Not all might be available 
 URL| Description
 ---|------------
 [gu.ms/ip](http://gu.ms/ip)| your (public) IP address
-[gu.ms/pass](http://gu.ms/pass)| random password generator [default:16 digit]
+[gu.ms/pass](http://gu.ms/pass)| random password generator [default:16 characters]
 [gu.ms/pass/10/an](http://gu.ms/pass/10/an)| random password generator with 10 digits and *alpha* *numeric* only
 [gu.ms/mx/google.com](http://gu.ms/mx/google.com)| the MX record for google.com domain
 [gu.ms/ns/google.com](http://gu.ms/ns/google.com)| the nameservers for google.com domain
