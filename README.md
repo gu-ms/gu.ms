@@ -34,6 +34,8 @@ URL| Description
 gu.ms/cert/google.com| provides the certificate validity or where the cert has failed
 gu.ms/man/lsmod| man page of lsmod
 [gu.ms/time](http://gu.ms/time)| provides current time in GMT
+gu.ms/json2yaml | convert JSON to YAML (POST)
+gu.ms/yaml2json | convert YAML to JSON (POST)
     
 
 ##### IP Address #####
